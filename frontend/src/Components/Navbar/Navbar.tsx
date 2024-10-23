@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/useAuth";
+import logo from "./finpal-high-resolution-logo-transparent.png";
 
 interface Props {}
 
@@ -7,18 +8,20 @@ const Navbar = ({}: Props) => {
   const { isLoggedIn, user, logoutUser } = useAuth();
 
   return (
-    <nav className="relative container mx-auto p-6">
+    <nav className="p-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-20">
-          <Link to="/">Financial Tool Logo</Link>
-          <div className="hidden font-bold lg:flex">
-            <Link to="/search" className="text-black hover:text-darkBlue">
-              Search
-            </Link>
-          </div>
+          <Link to="/">
+            <img className="flex w-48" src={logo} alt="finpal logo" />
+          </Link>
         </div>
         {isLoggedIn() ? (
           <div className="hidden lg:flex items-center space-x-6 text-back">
+            {/* <div className="hidden font-bold lg:flex">
+              <Link to="/search" className="text-black hover:text-darkBlue">
+                Search
+              </Link>
+            </div> */}
             <div>Welcome, {user?.userName}</div>
             <button
               onClick={logoutUser}

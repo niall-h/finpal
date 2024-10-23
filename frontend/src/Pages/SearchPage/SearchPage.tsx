@@ -17,7 +17,10 @@ interface Props {}
 
 const SearchPage = (props: Props) => {
   const [search, setSearch] = useState<string>("");
-  const [searchResult, setSearchResult] = useState<CompanySearch[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [searchResult, setSearchResult] = useState<CompanySearch[] | null>(
+    null
+  );
   const [serverError, setServerError] = useState<string | null>(null);
   const [portfolioValues, setPortfolioValues] = useState<PortfolioGet[] | null>(
     []
@@ -43,7 +46,15 @@ const SearchPage = (props: Props) => {
 
   const handleSearchSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
+    setLoading(true);
     setServerError("");
+
+    if (search === "") {
+      setSearchResult(null);
+      setLoading(false);
+      return;
+    }
+
     const result = await searchCompanies(search);
 
     if (typeof result === "string") {
@@ -51,6 +62,8 @@ const SearchPage = (props: Props) => {
     } else if (Array.isArray(result.data)) {
       setSearchResult(result.data);
     }
+
+    setLoading(false);
   };
 
   const onPortfolioCreate = (e: any) => {
@@ -84,20 +97,26 @@ const SearchPage = (props: Props) => {
   };
 
   return (
-    <div className="App">
-      <Search
-        search={search}
-        onChange={handleSearchChange}
-        onSearchSubmit={handleSearchSubmit}
-      />
-      <ListPortfolio
-        portfolioValues={portfolioValues!}
-        onPortfolioDelete={onPortfolioDelete}
-      />
-      <CardList
-        searchResult={searchResult}
-        onPortfolioCreate={onPortfolioCreate}
-      />
+    <div className="App flex h-[calc(100vh-110px)] pb-5">
+      <div className="basis-2/3 flex flex-col border-2 rounded-xl">
+        <Search
+          search={search}
+          onChange={handleSearchChange}
+          onSearchSubmit={handleSearchSubmit}
+        />
+        <CardList
+          loading={loading}
+          searchResult={searchResult}
+          onPortfolioCreate={onPortfolioCreate}
+        />
+      </div>
+      <div className="basis-1/3 bg-gray-100 rounded-lg ml-5">
+        <ListPortfolio
+          portfolioValues={portfolioValues!}
+          onPortfolioDelete={onPortfolioDelete}
+        />
+      </div>
+
       {serverError && <div>Unable to connect to API</div>}
     </div>
   );

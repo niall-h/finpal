@@ -22,15 +22,21 @@ const Card: React.FC<Props> = ({
       id={id}
     >
       <Link
+        className="w-full hover:bg-slate-200"
         to={`/company/${searchResult.symbol}/company-profile`}
-        className="font-bold text-center text-black md:text-left"
       >
-        {searchResult.name} ({searchResult.symbol})
+        <div className="flex font-bold text-center text-black md:text-left text-lg">
+          {searchResult.name}{" "}
+          <i className="ml-2 text-slate-400">{searchResult.symbol}</i>
+        </div>
+        <div className="text-black text-sm">
+          Currency: {searchResult.currency}
+        </div>
+        <div className="font-bold text-black text-sm">
+          {searchResult.exchangeShortName} - {searchResult.stockExchange}
+        </div>
       </Link>
-      <p className="text-black">{searchResult.currency}</p>
-      <p className="font-bold text-black">
-        {searchResult.exchangeShortName} - {searchResult.stockExchange}
-      </p>
+
       <AddPortfolio
         onPortfolioCreate={onPortfolioCreate}
         symbol={searchResult.symbol}
