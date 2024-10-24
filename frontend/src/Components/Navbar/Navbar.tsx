@@ -8,7 +8,7 @@ const Navbar = ({}: Props) => {
   const { isLoggedIn, user, logoutUser } = useAuth();
 
   return (
-    <nav className="p-6">
+    <nav className="sticky h-30 p-6 z-10">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-20">
           <Link to="/">

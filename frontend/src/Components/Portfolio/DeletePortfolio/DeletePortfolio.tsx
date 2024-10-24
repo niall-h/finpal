@@ -1,4 +1,5 @@
 import React, { SyntheticEvent } from "react";
+import { CiCircleRemove } from "react-icons/ci";
 
 interface Props {
   portfolioValue: string;
@@ -10,11 +11,8 @@ const DeletePortfolio = ({ portfolioValue, onPortfolioDelete }: Props) => {
     <div>
       <form onSubmit={onPortfolioDelete}>
         <input hidden={true} value={portfolioValue} readOnly={true} />
-        <button
-          type="submit"
-          className="block m-auto w-20 py-3 text-white duration-200 border-2 rounded-lg bg-red-500 hover:text-red-500 hover:bg-white border-red-500"
-        >
-          X
+        <button type="submit" className="">
+          <CiCircleRemove className="text-4xl text-red-600 hover:text-red-800" />
         </button>
       </form>
     </div>

@@ -7,7 +7,7 @@ import { UserProvider } from "./Context/useAuth";
 function App() {
   return (
     <UserProvider>
-      <div className="relative container mx-auto flex flex-col min-h-screen">
+      <div className="relative container mx-auto flex flex-col max-h-max">
         <Navbar />
         <Outlet />
         <ToastContainer />

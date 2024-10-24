@@ -110,7 +110,7 @@ const SearchPage = (props: Props) => {
           onPortfolioCreate={onPortfolioCreate}
         />
       </div>
-      <div className="basis-1/3 bg-gray-100 rounded-lg ml-5">
+      <div className="basis-1/3 flex flex-col bg-gray-100 rounded-xl ml-5">
         <ListPortfolio
           portfolioValues={portfolioValues!}
           onPortfolioDelete={onPortfolioDelete}

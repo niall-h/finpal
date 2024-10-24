@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import { CompanyProfile } from "../../company";
 import { getCompanyProfile } from "../../api";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import CompanyDashboard from "../../Components/Dashboard/CompanyDashboard";
 import Tile from "../../Components/Tile/Tile";
 import TenKFinder from "../../Components/TenKFinder/TenKFinder";
+import Spinner from "../../Components/Spinner/Spinner";
 
 interface Props {}
 
 const CompanyPage = (props: Props) => {
   let { ticker } = useParams();
+  const location = useLocation();
   const [company, setCompany] = useState<CompanyProfile>();
   const [serverError, setServerError] = useState<string | null>();
 
@@ -32,7 +34,7 @@ const CompanyPage = (props: Props) => {
       {serverError ? (
         <div className="w-full text-center">{serverError}</div>
       ) : company ? (
-        <div className="w-full container relative flex ct-docs-disable-sidebar-content">
+        <div className="w-full h-full relative flex flex-row ct-docs-disable-sidebar-content">
           <Sidebar />
           <CompanyDashboard ticker={ticker!}>
             <Tile title="Company Name" subtitle={company.companyName} />
@@ -43,13 +45,19 @@ const CompanyPage = (props: Props) => {
               subtitle={`$${company.dcf.toFixed(2).toString()}`}
             />
             <TenKFinder ticker={company.symbol} />
-            <p className="bg-white shadow rounded text-medium text-gray-500 p-3 mt-4 m-4">
-              {company.description}
-            </p>
+            {location.pathname === `/company/${company.symbol}` ||
+            location.pathname ===
+              `/company/${company.symbol}/company-profile` ? (
+              <p className="bg-white shadow rounded text-medium text-gray-500 p-3 mt-4 m-4 mr-0">
+                {company.description}
+              </p>
+            ) : null}
           </CompanyDashboard>
         </div>
       ) : (
-        <div className="w-full text-center">Loading</div>
+        <div className="w-full">
+          <Spinner />
+        </div>
       )}
     </>
   );

@@ -19,7 +19,7 @@ const Table = ({ config, data }: Props) => {
 
   const renderedHeaders = config.map((config: any) => (
     <th
-      className="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+      className="px-4 text-left text-xs font-medium text-gray-500 uppercase"
       key={config.label}
     >
       {config.label}
@@ -27,11 +27,9 @@ const Table = ({ config, data }: Props) => {
   ));
 
   return (
-    <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8">
-      <table>
-        <thead className="min-w-full divide-y divide=gray-200 m-5">
-          {renderedHeaders}
-        </thead>
+    <div className="bg-white border w-full overflow-auto rounded-lg p-4 sm:p-6 xl:p-4">
+      <table className="divide-y divide-solid">
+        <thead>{renderedHeaders}</thead>
         <tbody>{renderedRows}</tbody>
       </table>
     </div>

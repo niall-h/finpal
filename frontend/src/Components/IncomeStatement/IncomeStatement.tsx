@@ -99,13 +99,13 @@ const IncomeStatement = (props: Props) => {
   console.log(incomeStatement);
 
   return (
-    <>
+    <div className="w-full pl-4">
       {incomeStatement ? (
         <Table data={incomeStatement} config={configs} />
       ) : (
         <Spinner />
       )}
-    </>
+    </div>
   );
 };
 
