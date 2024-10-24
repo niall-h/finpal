@@ -33,6 +33,8 @@ export const UserProvider = ({ children }: Props) => {
       setToken(token);
     }
 
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
     setIsReady(true);
   }, []);
 

@@ -1,17 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { FaHome, FaMoneyBill, FaTable } from "react-icons/fa";
 import { FaTableCells } from "react-icons/fa6";
+import StockComment from "../StockComment/StockComment";
 
-interface Props {}
+interface Props {
+  ticker: string;
+}
 
-const Sidebar = (props: Props) => {
+const Sidebar = ({ ticker }: Props) => {
   return (
-    <nav className="sticky h-[calc(100vh-140px)] rounded-xl border w-1/5 py-4 px-6 top-0 bottom-0 w-64 bg-gray-100 shadow-xl left-0 absolute flex-row flex-nowrap md:z-10 z-9999 transition-all duration-300 ease-in-out transform md:translate-x-0 -translate-x-full">
+    <nav className="sticky h-[calc(100vh-140px)] rounded-xl border w-1/5 top-0 bottom-0 w-64 bg-gray-100 shadow-xl left-0 absolute flex-row flex-nowrap md:z-10 z-9999 transition-all duration-300 ease-in-out transform md:translate-x-0 -translate-x-full">
       <button className="md:hidden flex items-center justify-center cursor-pointer text-blueGray-700 w-6 h-10 border-l-0 border-r border-t border-b border-solid border-blueGray-100 text-xl leading-none bg-white rounded-r border border-solid border-transparent absolute top-1/2 -right-24-px focus:outline-none z-9998">
         <i className="fas fa-ellipsis-v"></i>
       </button>
       <div className="flex-col min-h-full px-0 flex flex-wrap items-center justify-between w-full mx-auto overflow-y-auto overflow-x-hidden">
-        <div className="flex flex-col items-stretch opacity-100 relative mt-4 overflow-y-auto overflow-x-hidden h-auto z-40 items-center flex-1 rounded w-full">
+        <div className="flex flex-col items-stretch opacity-100 px-6 relative mt-4 overflow-y-auto overflow-x-hidden h-auto z-40 items-center flex-1 rounded w-full">
           <div className="md:flex-col md:min-w-full flex flex-col list-none">
             <Link
               to="company-profile"
@@ -43,6 +46,7 @@ const Sidebar = (props: Props) => {
             </Link>
           </div>
         </div>
+        <StockComment stockSymbol={ticker!} />
       </div>
     </nav>
   );

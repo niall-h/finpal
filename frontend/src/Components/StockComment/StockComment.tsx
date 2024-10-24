@@ -43,7 +43,10 @@ const StockComment = ({ stockSymbol }: Props) => {
 
   return (
     <div className="flex flex-col">
-      {loading ? <Spinner /> : <StockCommentList comments={comments!} />}
+      <p className="ml-3 mb-2 text-md">Comments:</p>
+      <div className="h-64 overflow-auto">
+        {loading ? <Spinner /> : <StockCommentList comments={comments!} />}
+      </div>
       <StockCommentForm symbol={stockSymbol} handleComment={handleComment} />
     </div>
   );

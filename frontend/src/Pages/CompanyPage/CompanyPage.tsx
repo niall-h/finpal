@@ -35,7 +35,7 @@ const CompanyPage = (props: Props) => {
         <div className="w-full text-center">{serverError}</div>
       ) : company ? (
         <div className="w-full h-full relative flex flex-row ct-docs-disable-sidebar-content">
-          <Sidebar />
+          <Sidebar ticker={ticker!} />
           <CompanyDashboard ticker={ticker!}>
             <Tile title="Company Name" subtitle={company.companyName} />
             <Tile title="Price" subtitle={`$${company.price.toString()}`} />

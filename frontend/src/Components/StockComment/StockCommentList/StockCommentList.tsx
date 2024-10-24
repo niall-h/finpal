@@ -7,13 +7,13 @@ interface Props {
 
 const StockCommentList = ({ comments }: Props) => {
   return (
-    <>
+    <div className="h-full overflow-auto flex flex-col-reverse">
       {comments
         ? comments.map((comment: CommentGet) => (
             <StockCommentListItem comment={comment} />
           ))
         : null}
-    </>
+    </div>
   );
 };
 

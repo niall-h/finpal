@@ -23,7 +23,9 @@ export const commentPostAPI = async (
 
 export const commentGetAPI = async (symbol: string) => {
   try {
-    const data = await axios.get<CommentGet[]>(`${api}?Symbol=${symbol}`);
+    const data = await axios.get<CommentGet[]>(
+      `${api}?Symbol=${symbol}&IsDescending=true`
+    );
     return data;
   } catch (e) {
     handleError(e);

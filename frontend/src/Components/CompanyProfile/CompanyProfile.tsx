@@ -105,7 +105,6 @@ const CompanyProfile = (props: Props) => {
       {companyData ? (
         <>
           <RatioList data={companyData} config={tableConfig} />
-          <StockComment stockSymbol={ticker} />
         </>
       ) : (
         <Spinner />
