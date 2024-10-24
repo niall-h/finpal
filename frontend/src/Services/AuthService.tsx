@@ -23,6 +23,7 @@ export const registerAPI = async (
   password: string
 ) => {
   try {
+    console.log("in registerAPI");
     const data = await axios.post<UserProfileToken>(`${api}account/register`, {
       email: email,
       username: username,

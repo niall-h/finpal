@@ -11,6 +11,7 @@ import CashFlowStatement from "../Components/CashFlowStatement/CashFlowStatement
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import RegisterPage from "../Pages/RegisterPage/RegisterPage";
 import ProtectedRoute from "./ProtectedRoute";
+import AuthRoute from "./AuthRoute";
 
 export const router = createBrowserRouter([
   {
@@ -23,11 +24,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <LoginPage />,
+        element: (
+          <AuthRoute>
+            <LoginPage />
+          </AuthRoute>
+        ),
       },
       {
         path: "/register",
-        element: <RegisterPage />,
+        element: (
+          <AuthRoute>
+            <RegisterPage />
+          </AuthRoute>
+        ),
       },
       {
         path: "search",
@@ -36,10 +45,6 @@ export const router = createBrowserRouter([
             <SearchPage />
           </ProtectedRoute>
         ),
-      },
-      {
-        path: "design-guide",
-        element: <DesignPage />,
       },
       {
         path: "company/:ticker",

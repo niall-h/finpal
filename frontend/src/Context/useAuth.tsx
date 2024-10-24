@@ -46,6 +46,7 @@ export const UserProvider = ({ children }: Props) => {
     await registerAPI(email, username, password)
       .then((res) => {
         if (res) {
+          console.log("in registerUser");
           localStorage.setItem("token", res?.data.token);
           const userObj = {
             userName: res?.data.userName,

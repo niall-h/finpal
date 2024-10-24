@@ -116,8 +116,11 @@ const SearchPage = (props: Props) => {
           onPortfolioDelete={onPortfolioDelete}
         />
       </div>
-
-      {serverError && <div>Unable to connect to API</div>}
+      <div className="absolute top-60 left-60 text-red-600">
+        {serverError && (
+          <div>Something went wrong. Please try again later.</div>
+        )}
+      </div>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../../Context/useAuth";
 import { useForm } from "react-hook-form";
+import YupPassword from "yup-password";
 
 type RegisterFormsInputs = {
   userName: string;
@@ -9,14 +10,16 @@ type RegisterFormsInputs = {
   email: string;
 };
 
+YupPassword(Yup);
 const validation = Yup.object().shape({
-  userName: Yup.string().required("Username is required"),
-  password: Yup.string().required("Password is required"),
-  email: Yup.string().required("Email is required"),
+  userName: Yup.string().required("Username is required."),
+  password: Yup.string().password().required("Password is required."),
+  email: Yup.string().required("Email is required."),
 });
 
 const RegisterPage = () => {
-  const { registerUser } = useAuth();
+  YupPassword(Yup);
+  const { registerUser, isLoggedIn } = useAuth();
   const {
     register,
     handleSubmit,
@@ -29,7 +32,7 @@ const RegisterPage = () => {
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-[calc(100vh-130px)] lg:py-0">
         <div className="w-full bg-white rounded-lg shadow dark:border md:mb-20 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
